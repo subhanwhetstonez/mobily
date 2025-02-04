@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-
+import CrossBorders from "../screens/crossBorders"
 const ViewScreen = () => {
   const [socket, setSocket] = useState(null);
   const [currentPage, setCurrentPage] = useState("/view");
@@ -10,13 +10,10 @@ const ViewScreen = () => {
   useEffect(() => {
     const socketInstance = io("http://192.168.0.109:8080");
     setSocket(socketInstance);
-
     socketInstance.emit("joinRoom", currentPage);
-
     socketInstance.on("redirect", (data) => {
       setCurrentPage(data.link);
     });
-
     return () => {
       socketInstance.disconnect();
     };
@@ -24,42 +21,40 @@ const ViewScreen = () => {
 
   const pageComponents = {
     "/terrestrial-cross-borders": (
-      <div>
-        <div>Terrestrial & Cross Borders</div>
-      </div>
+      <CrossBorders />
     ),
     "/data-centers": (
-      <div>
+      <div className="bg-[#04115C] h-[100vh] w-full">
         <div>Data Center</div>
       </div>
     ),
     "/landing-stations": (
-      <div>
+      <div className="bg-[#04115C] h-[100vh] w-full">
         <div>Landing Stations</div>
       </div>
     ),
     "/global-points": (
-      <div>
+      <div className="bg-[#04115C] h-[100vh] w-full">
         <div>Global Points of Presence</div>
       </div>
     ),
     "/towers": (
-      <div>
+      <div className="bg-[#04115C] h-[100vh] w-full">
         <div>Towers</div>
       </div>
     ),
     "/equinix-jeddah": (
-      <div>
+      <div className="bg-[#04115C] h-[100vh] w-full">
         <div>Equinix Jeddah Internet Exchange</div>
       </div>
     ),
     "/submarine-cables": (
-      <div>
+      <div className="bg-[#04115C] h-[100vh] w-full">
         <div>Submarine Cable Systems</div>
       </div>
     ),
     "/internet-gateways": (
-      <div>
+      <div className="bg-[#04115C] h-[100vh] w-full">
         <div>Internet Gateways</div>
       </div>
     ),

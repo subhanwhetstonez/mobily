@@ -5,11 +5,9 @@ import { io } from "socket.io-client";
 
 const HomeMenu = () => {
   const [socket, setSocket] = useState(null);
-
   useEffect(() => {
     const socketInstance = io("http://192.168.0.109:8080");
     setSocket(socketInstance);
-
     return () => {
       socketInstance.disconnect();
     };
@@ -17,16 +15,13 @@ const HomeMenu = () => {
 
   const handleMenuClick = (url) => {
     if (socket) {
-      console.log("Emitting navigate with link:", url);
       socket.emit("navigate", { link: url });
     } else {
       console.log("Socket not initialized yet");
     }
   };
-
-
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex justify-between bg-[#04115C] h-full">
       <div className="relative z-10 p-28">
         <ul className="flex flex-col gap-[20px]">
           <li className="text-[32px] flex gap-[8px] cursor-pointer" onClick={() => handleMenuClick("/terrestrial-cross-borders")}>
@@ -55,8 +50,8 @@ const HomeMenu = () => {
           </li>
         </ul>
       </div>
-      <div className="absolute top-28 right-3">
-        <img src="/globe.svg" className="" />
+      <div className="absolute top-28 right-3 bg-[#04115C]">
+        <img src="/globe.svg" className="bg-[#04115C]" />
       </div>
     </div>
   );
